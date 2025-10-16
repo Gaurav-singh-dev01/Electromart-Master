@@ -1,0 +1,120 @@
+.main_login_bgimg{
+    background-image: url('../loginComponent/img/login-bg.png');
+     height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+.login_form {
+    text-align: center;
+    border: 1px solid #ffffff;
+    padding: 25px 0px 10px; 
+    border-radius:10px;
+    background-color: #ffffff;
+}
+.loginText {
+    margin-bottom: 40px;
+}
+.loginText hr{
+        width: 40px;
+    margin: 0px 20px;
+    height: 3px;
+    border: 2px solid #1c3436;
+    opacity: 1 !important; 
+}
+.loginText h1 {
+    font-size: 28px;
+    text-align: left;
+    padding: 0px 20px;
+}
+.login_textarea {
+    margin: 20px 20px;
+    text-align: left;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.login_textarea svg{
+    position: absolute;
+    top: 18px;
+    left: 10px;
+}
+.login_textarea input{ 
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    padding: 13px 0px 13px 40px;
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.eye-Relativemotion {
+    position: relative;
+    right: 40px;
+    top: 4px;
+    float: right;
+}
+.eye-Relativemotion .eye_Font{
+    position: absolute;
+    right:0;
+    top:13px;
+}
+.login_passwordarea{
+    margin: 20px 20px;
+    text-align: left;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.login_passwordarea svg{
+    position: absolute;
+    top: 18px;
+    left: 10px;
+}
+.login_passwordarea input{
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    padding: 13px 0px 13px 40px;
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.forget_rembember {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 89%;
+    margin: 0px 20px 25px 20px;
+}
+ 
+.Special_remember input {
+    height: 11px;
+}
+.Special_remember span {
+    color: #708090;
+     font-weight: 400;
+     font-size:14px;
+}
+ 
+.Special_forgett a {
+color: #2874f0;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 13px; 
+}
+ 
+.submit_Button button 
+ {
+    width: 35%;
+    background-color: #1c3436;
+    color: #ffffff;
+    border-radius: 10px;
+}
+.register-yourself {
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+.register-yourself a {
+    color: #2874f0;
+    font-weight: 500;
+    text-decoration: none; 
+    font-size: 13px;
+}
