@@ -7,7 +7,7 @@ import Forget from './components/loginComponent/forget'
 import Register from './components/loginComponent/Register'
 import Index from './components/Index'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; 
-import Header from './components/headerComponent/Header'
+import Header from './components/headerComponent/header'
 import Footer from './components/footerComponent/Footer'
 
 
