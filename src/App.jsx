@@ -18,7 +18,7 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
     <>     
 
             <BrowserRouter>
-             {isLoggedIn && <Header />}
+             {isLoggedIn && <Header/>}
              <Routes>
             <Route path="/" element={isLoggedIn ? <Index /> : <Navigate to="/Login" />} />
             <Route path="/Login"  element={<Login setIsLoggedIn={setIsLoggedIn} />} />

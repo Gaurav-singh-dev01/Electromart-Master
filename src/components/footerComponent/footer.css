@@ -1,0 +1,84 @@
+.electromart-footer {
+    background-image: url(../src/components/footerComponent/img/footer-bg.svg);
+    padding: 120px 0px;
+    background-color: #1b1c1b;
+    background-repeat: no-repeat;
+}
+.tagline-footer {
+    text-align: center;
+    padding-bottom: 80px;
+    border-bottom: 1px solid #0099ff38;
+}
+.tagline-footer h4 {
+    text-align: center;
+    font-size: 44px;
+    font-weight: 700;
+    color: #ffffff; 
+    margin-bottom: 60px;
+}
+.tagline-footer .smile-bg a {
+    padding: 15px 97px;
+    background-color: #0099ff;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 15px;
+    text-decoration: none;
+    margin-top: 12px;
+    display: inline-block;
+}
+.smile-bg {
+    background-image: url('../src/components/footerComponent/img/smile.svg');
+    background-size: auto;
+    background-position: center 50%;
+    height: 78px;
+    background-repeat: no-repeat;
+}
+.myfootlogo img {
+    width: 250px;
+}
+.footer_area span {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+.footer_area ul {
+    list-style: none;
+    padding: 0px;
+}
+.footer_area ul li 
+ {
+    list-style: none;
+    padding: 0px;
+    margin-bottom: 13px;
+}
+.footer_area ul li a {
+    color: #faebd7;
+    font-weight: 300;
+    text-decoration: none;
+    margin-bottom: 6px;
+    display: block;
+    font-size: 13px;
+    transition: .3s;
+}
+.footer_area ul li a:hover {
+color:#ffffff;
+font-weight: 400;
+}
+.footer_area ul li i {
+    color: #faebd7;
+    font-weight: 300;
+    text-decoration: none;
+    margin-bottom: 6px;
+    display: block;
+    font-size: 13px;
+    transition: .3s;
+}
+.footer_area ul li img {
+    width: 150px;
+    margin-right: 15px;
+}
+.tagline-footerBottom { 
+    padding: 50px 0px;
+    border-top: 1px solid #0099ff38;
+}

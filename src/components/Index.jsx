@@ -5,14 +5,13 @@ import { faUser, faKey, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-ic
 import { Link } from 'react-router-dom'
 import Footer from './footerComponent/Footer';
 import Header from './headerComponent/header';
-
+ 
 export default function Index() {
   return (
     <>
-      <Header/>
-            
-      <Footer />
-  
+       <Header />
+      
+       <Footer />
     </>
   )
 }
