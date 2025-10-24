@@ -1,14 +1,400 @@
-import React, { useState, useRef, useEffect } from 'react' 
+import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import '../loginComponent/img/login-bg.png'  
+import '../loginComponent/img/login-bg.png'
 import { Link } from 'react-router-dom'
- 
+import '../headerComponent/header.css'
+import electromartLogo from '../headerComponent/img/Electromart-logo.png'
+import { Input } from 'antd';
+import { HeartOutlined, LoginOutlined, ShoppingCartOutlined, UserAddOutlined } from '@ant-design/icons';
+import Refrigerator from '../headerComponent/img/Refrigerator.png'
+import AC from '../headerComponent/img/aC.png'
+import Washingmachine from '../headerComponent/img/Washingmachine.png'
+import TV from '../headerComponent/img/TV.png'
+import microwave from '../headerComponent/img/microwave.png';
+import kitchen from '../headerComponent/img/kitchen.png'
+import Gyser from '../headerComponent/img/geyser.png'
+import Speakers from '../headerComponent/img/speakers.png'
 export default function Header() {
- 
+
   return (
     <>
-      
-            
+      <div className='color_blue'>
+        <div className='container-fluid'>
+          <div className='row'>
+
+            <div className='col-lg-12 col-md-12 col-12'>
+              <div className='header-minitext text-end'>
+                <ul>
+                  <li> <Link to=""> Order</Link></li> &nbsp; &nbsp; &nbsp; &nbsp;
+                  <li> <Link to=""> Contact us</Link></li>&nbsp; &nbsp; &nbsp; &nbsp;
+                  <li> <Link to=""> Resource Center</Link></li> &nbsp; &nbsp; &nbsp; &nbsp;
+                  <li> <Link to=""> Find a Store</Link></li>                  
+                </ul>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+      <div className='main_header_fixedItems'>
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-lg-3 col-md-3 col-sm-12 col-12'>
+              <div className='header-Electromart_logo'>
+                <img src={electromartLogo} className='img img-fluid' />
+                <span> Powering Your World <br/>with Innovation </span>
+              </div>
+            </div>
+            <div className='col-lg-6 col-md-6 col-sm-12 col-12 align-self-center'>
+              <div className='header-Electromart_search'>
+                <Input.Search placeholder="Search for products, brands and more" className="custom-search-input" size='large' variant="filled" />
+              </div>
+            </div>
+            <div className='col-lg-3 col-md-3 col-sm-12 col-12 align-content-center'>
+              <div className='megamenu-list'>
+                <ul>
+                  <li> <span> <UserAddOutlined style={{ color:'white'}}/></span> <Link to={''}> Sign up </Link></li>
+                  <li> <span> <LoginOutlined style={{ color:'white'}}/></span> <Link to={''}> Login </Link></li>
+                  <li> <span> <ShoppingCartOutlined style={{ color:'white'}}/></span> <Link to={''}> Cart </Link></li>
+                  <li> <span> <HeartOutlined style={{ color:'white'}}/></span> <Link to={''}> Wishlist </Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div className="box-shdw"> 
+        <div className="container-fluid">
+          <div className="row">
+              <div className='col-lg-12 col-md-12 col-sm-12 col-12'>
+              <div className='myNav'>
+                <div class="wrapper">
+
+                  <input type="radio" name="slider" id="menu-btn" />
+                  <input type="radio" name="slider" id="close-btn" />
+                  <ul class="nav-links">
+                    <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+
+                    <li>
+                      <a href="#" class="desktop-item"><img src={AC} className='img img-fluid' style={{width:'40px'}}/> Air Condition</a>
+                      <input type="checkbox" id="showMega" /> 
+                      <label for="showMega" class="mobile-item">Mega Menu</label>
+                      <div class="mega-box">
+                        <div class="content">
+                          <div class="row">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="" />
+                          </div>
+                          <div class="row">
+                            <header>Design Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Graphics</a></li>
+                              <li><a href="#">Vectors</a></li>
+                              <li><a href="#">Business cards</a></li>
+                              <li><a href="#">Custom logo</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Email Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Personal Email</a></li>
+                              <li><a href="#">Business Email</a></li>
+                              <li><a href="#">Mobile Email</a></li>
+                              <li><a href="#">Web Marketing</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Security services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Site Seal</a></li>
+                              <li><a href="#">VPS Hosting</a></li>
+                              <li><a href="#">Privacy Seal</a></li>
+                              <li><a href="#">Website design</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a href="#" class="desktop-item"><img src={TV} className='img img-fluid' style={{width:'40px'}}/> Led Tv</a>
+                      <input type="checkbox" id="showMega" />
+                      <label for="showMega" class="mobile-item">Mega Menu</label>
+                      <div class="mega-box">
+                        <div class="content">
+                          <div class="row">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="" />
+                          </div>
+                          <div class="row">
+                            <header>Design Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Graphics</a></li>
+                              <li><a href="#">Vectors</a></li>
+                              <li><a href="#">Business cards</a></li>
+                              <li><a href="#">Custom logo</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Email Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Personal Email</a></li>
+                              <li><a href="#">Business Email</a></li>
+                              <li><a href="#">Mobile Email</a></li>
+                              <li><a href="#">Web Marketing</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Security services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Site Seal</a></li>
+                              <li><a href="#">VPS Hosting</a></li>
+                              <li><a href="#">Privacy Seal</a></li>
+                              <li><a href="#">Website design</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a href="#" class="desktop-item"><img src={Washingmachine} className='img img-fluid' style={{width:'40px'}}/> Washing Machine</a>
+                      <input type="checkbox" id="showMega" />
+                      <label for="showMega" class="mobile-item">Mega Menu</label>
+                      <div class="mega-box">
+                        <div class="content">
+                          <div class="row">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="" />
+                          </div>
+                          <div class="row">
+                            <header>Design Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Graphics</a></li>
+                              <li><a href="#">Vectors</a></li>
+                              <li><a href="#">Business cards</a></li>
+                              <li><a href="#">Custom logo</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Email Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Personal Email</a></li>
+                              <li><a href="#">Business Email</a></li>
+                              <li><a href="#">Mobile Email</a></li>
+                              <li><a href="#">Web Marketing</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Security services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Site Seal</a></li>
+                              <li><a href="#">VPS Hosting</a></li>
+                              <li><a href="#">Privacy Seal</a></li>
+                              <li><a href="#">Website design</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a href="#" class="desktop-item"><img src={Refrigerator} className='img img-fluid' style={{width:'40px'}}/> Refrigerator</a>
+                      <input type="checkbox" id="showMega" /> 
+                      <label for="showMega" class="mobile-item">Mega Menu</label>
+                      <div class="mega-box">
+                        <div class="content">
+                          <div class="row">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="" />
+                          </div>
+                          <div class="row">
+                            <header>Design Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Graphics</a></li>
+                              <li><a href="#">Vectors</a></li>
+                              <li><a href="#">Business cards</a></li>
+                              <li><a href="#">Custom logo</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Email Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Personal Email</a></li>
+                              <li><a href="#">Business Email</a></li>
+                              <li><a href="#">Mobile Email</a></li>
+                              <li><a href="#">Web Marketing</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Security services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Site Seal</a></li>
+                              <li><a href="#">VPS Hosting</a></li>
+                              <li><a href="#">Privacy Seal</a></li>
+                              <li><a href="#">Website design</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a href="#" class="desktop-item"> <img src={microwave} className='img img-fluid' style={{width:'40px'}}/> Microwave</a>
+                      <input type="checkbox" id="showMega" />
+                      <label for="showMega" class="mobile-item">Mega Menu</label>
+                      <div class="mega-box">
+                        <div class="content">
+                          <div class="row">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="" />
+                          </div>
+                          <div class="row">
+                            <header>Design Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Graphics</a></li>
+                              <li><a href="#">Vectors</a></li>
+                              <li><a href="#">Business cards</a></li>
+                              <li><a href="#">Custom logo</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Email Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Personal Email</a></li>
+                              <li><a href="#">Business Email</a></li>
+                              <li><a href="#">Mobile Email</a></li>
+                              <li><a href="#">Web Marketing</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Security services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Site Seal</a></li>
+                              <li><a href="#">VPS Hosting</a></li>
+                              <li><a href="#">Privacy Seal</a></li>
+                              <li><a href="#">Website design</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a href="#" class="desktop-item"> <img src={kitchen} className='img img-fluid' style={{width:'40px'}}/> Kitchen Acessories</a>
+                      <input type="checkbox" id="showMega" />
+                      <label for="showMega" class="mobile-item">Mega Menu</label>
+                      <div class="mega-box">
+                        <div class="content">
+                          <div class="row">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="" />
+                          </div>
+                          <div class="row">
+                            <header>Design Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Graphics</a></li>
+                              <li><a href="#">Vectors</a></li>
+                              <li><a href="#">Business cards</a></li>
+                              <li><a href="#">Custom logo</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Email Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Personal Email</a></li>
+                              <li><a href="#">Business Email</a></li>
+                              <li><a href="#">Mobile Email</a></li>
+                              <li><a href="#">Web Marketing</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Security services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Site Seal</a></li>
+                              <li><a href="#">VPS Hosting</a></li>
+                              <li><a href="#">Privacy Seal</a></li>
+                              <li><a href="#">Website design</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </li> 
+                    <li>
+                      <a href="#" class="desktop-item"> <img src={Gyser} className='img img-fluid' style={{width:'40px'}}/> Gyser </a>
+                      <input type="checkbox" id="showMega" />
+                      <label for="showMega" class="mobile-item">Mega Menu</label>
+                      <div class="mega-box">
+                        <div class="content">
+                          <div class="row">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="" />
+                          </div>
+                          <div class="row">
+                            <header>Design Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Graphics</a></li>
+                              <li><a href="#">Vectors</a></li>
+                              <li><a href="#">Business cards</a></li>
+                              <li><a href="#">Custom logo</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Email Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Personal Email</a></li>
+                              <li><a href="#">Business Email</a></li>
+                              <li><a href="#">Mobile Email</a></li>
+                              <li><a href="#">Web Marketing</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Security services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Site Seal</a></li>
+                              <li><a href="#">VPS Hosting</a></li>
+                              <li><a href="#">Privacy Seal</a></li>
+                              <li><a href="#">Website design</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </li>   
+                                        <li>
+                      <a href="#" class="desktop-item"> <img src={Speakers} className='img img-fluid' style={{width:'40px'}}/> Speakers </a>
+                      <input type="checkbox" id="showMega" />
+                      <label for="showMega" class="mobile-item">Mega Menu</label>
+                      <div class="mega-box">
+                        <div class="content">
+                          <div class="row">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="" />
+                          </div>
+                          <div class="row">
+                            <header>Design Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Graphics</a></li>
+                              <li><a href="#">Vectors</a></li>
+                              <li><a href="#">Business cards</a></li>
+                              <li><a href="#">Custom logo</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Email Services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Personal Email</a></li>
+                              <li><a href="#">Business Email</a></li>
+                              <li><a href="#">Mobile Email</a></li>
+                              <li><a href="#">Web Marketing</a></li>
+                            </ul>
+                          </div>
+                          <div class="row">
+                            <header>Security services</header>
+                            <ul class="mega-links">
+                              <li><a href="#">Site Seal</a></li>
+                              <li><a href="#">VPS Hosting</a></li>
+                              <li><a href="#">Privacy Seal</a></li>
+                              <li><a href="#">Website design</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </li>                                        
+                  </ul>
+                  <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </>
-)
+  )
 }
