@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../loginComponent/img/login-bg.png'
 import '../loginComponent/login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faKey, faEye, faBackspace, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faKey, faEye, faBackspace, faChevronLeft, faHome } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
 
@@ -32,7 +32,9 @@ export default function Forget() {
                   <button> Submit </button>
                 </div>
                                 <div className='register-yourself'>
-                                     <Link to='/Register'> New to 4-Brothers? Create an account</Link>
+                                     <Link to='/Register'> New to Reliance Digital Select? Create an account</Link>
+                                <br/>
+                                     <Link to="/Index"><FontAwesomeIcon icon={faHome} /> Visit Reliance Digital Select</Link>
                                 </div>
               </div>
             </div>

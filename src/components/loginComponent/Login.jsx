@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import '../loginComponent/img/login-bg.png'
 import '../loginComponent/login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faKey, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faKey, faEye, faEyeSlash, faHome } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
 
@@ -80,7 +80,9 @@ export default function Login() {
                     <button type="submit"><Link to='/Index' className="text-decoration-none text-white"> Login </Link></button>
                   </div>
                   <div className='register-yourself'>
-                    <Link to='/Register'> New to 4-Brothers? Create an account</Link>
+                    <Link to='/Register'> New to Reliance Digital Select? Create an account</Link>
+                      <br/>
+                    <Link to="/Index"><FontAwesomeIcon icon={faHome} /> Visit Reliance Digital Select</Link>
                   </div>
                 </div>
               </div>

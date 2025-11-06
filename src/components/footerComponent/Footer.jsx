@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from "react";
 import '../loginComponent/img/login-bg.png'
 import '../loginComponent/login.css'
 import { Link } from 'react-router-dom'
@@ -6,19 +7,59 @@ import '../footerComponent/footer.css'
 import footLogo from '../footerComponent/img/Electromart-logo-2.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone'
-import { faChevronCircleRight, faEnvelope, faLocation, faLocationDot, faLocationPin } from '@fortawesome/free-solid-svg-icons'
+import { faChevronCircleRight, faChevronCircleUp, faEnvelope, faLocation, faLocationDot, faLocationPin } from '@fortawesome/free-solid-svg-icons'
 import playStore from '../footerComponent/img/playStore.png'
 import appStore from '../footerComponent/img/appStore.png'
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons/faFacebookF'
 import { faInstagramSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 import { faSquareFacebook } from '@fortawesome/free-brands-svg-icons/faSquareFacebook'
 export default function Footer() {
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowButton(window.scrollY > 200);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
 
+          {showButton && (
+        <button
+          onClick={scrollToTop}
+          style={{
+    position: 'fixed',
+    bottom: 17,
+    right: 20,
+    padding: '0px 0px',
+    background: 'transparent',
+    color:'#0090f0',
+    border: 'none',
+    borderRadius: 50,
+    cursor: 'pointer',
+    fontSize: 30,
+    zIndex:9,
+}}
+        >
+          <FontAwesomeIcon icon={faChevronCircleUp} />
+        </button>
+      )}
+
+  
       <div className="electromart-footer">
 
-        <div className="container">
+        <div className="container-fluid px-5">
           <div className='row'>
             <div className='col-12'>
               <div className='tagline-footer'>
@@ -30,14 +71,14 @@ export default function Footer() {
             </div>
             <div className='col-12'>
               <div className='row my-5'>
-                <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
+                <div className='col-lg-3 col-md-3 col-sm-12 col-12'>
                   <div className='myfootlogo'>
                     <img src={footLogo} className='img img-fluid' />
                   </div>
 
 
                 </div>
-                <div className='col-lg-8 col-md-8 col-sm-12 col-12'>
+                <div className='col-lg-9 col-md-9 col-sm-12 col-12'>
                   <div className='row'>
                     <div className='col-lg-3 col-md-3 col-sm-12 col-12 mt-3'>
                       <div className='footer_area'>
@@ -79,7 +120,7 @@ export default function Footer() {
                         <span>Contact us </span>
                         <ul>
                           <li>   <Link to=""> <FontAwesomeIcon icon={faPhone} />  +91 8750491010 </Link></li>
-                          <li>   <Link to=""> <FontAwesomeIcon icon={faEnvelope} /> Electromartestore@gmail.com  </Link></li>
+                          <li>   <Link to=""> <FontAwesomeIcon icon={faEnvelope} /> info@reliancedigitalselect.com  </Link></li>
                           <li>   <Link to=""> <FontAwesomeIcon icon={faLocationDot} />     Plot no -111, Sector 4, Vaishali, Ghaziabad, Uttar Pradesh 201019 </Link> </li>
                         </ul>
                       </div>
@@ -94,7 +135,7 @@ export default function Footer() {
 
                   <div className='col-lg-5'>
                     <div className='footer_area-applications'>
-                      <span>Experience Electromart App On Mobile</span>
+                      <span>Experience Reliance Digital Select App On Mobile</span>
                       <ul>
                         <li>
 
@@ -131,12 +172,12 @@ export default function Footer() {
               <div className="row mt-3">
                 <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
                   <div className='copyright_reserved text-start'>
-                    <p>  A Electromart Estore Store  </p>
+                    <p>  A Reliance Digital Select Store  </p>
                   </div>
                 </div>
                 <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
                   <div className='copyright_reserved text-center'>
-                    <p>  Electromart E-store © 2025. All right reserved  </p>
+                    <p>  Reliance Digital Select © 2025. All right reserved  </p>
                   </div>
                 </div>
                 <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
@@ -148,7 +189,10 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        
       </div>
+        
     </>
   )
 }

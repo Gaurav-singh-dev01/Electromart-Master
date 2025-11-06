@@ -25,7 +25,11 @@
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-multi-carousel": "^2.8.6",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.9.1",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1",
     "tailgrids": "^2.3.0"
   },
   "devDependencies": {

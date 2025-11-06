@@ -4,5 +4,178 @@
   font-family: "Poppins", sans-serif !important;
 }
 body{
-      font-family: "Poppins", sans-serif !important;
+      font-family: "Poppins", sans-serif !important; 
+}
+#element--0891--rollon{
+padding-top:165px;  
+padding-bottom: 100px;
+}
+.offer__banner{
+    margin: 15px 45px 42px 45px;
+}
+.offer__banner img{ 
+    border-radius: 5px;
+}
+.element__08976Id{
+      display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.lhs__98se h1 {
+    font-size: 23px;
+    font-weight: 800;
+    margin-bottom: 0px;
+}
+.lhs__98se p {
+    font-size: 16px;
+    color: #696969;
+    font-weight: 500;
+    margin-top: 5px;
+}
+.rhs__98se{
+  align-self: center;
+}
+.rhs__98se a {
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+    align-self: center;
+}
+ .heart-red {
+  color: red;
+}
+.trendingproducts {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px 12px 25px 12px;
+    justify-content: space-between;
+    display: grid;
+    margin-right: 5px;
+    width: -webkit-fill-available !important;
+    position: relative;
+    top: 0;
+    right: 0px;
+    background-color: #ffffff;
+}
+.trendingproducts svg {
+    position: absolute;
+    top: 5px;
+    right: 17px;
+    width: 12px;
+    color: #808080;
+}
+
+.trendingproducts .additional_line {
+    position: absolute;
+    top: 0px;
+    left: 0px; 
+    color: #ffffff; 
+    font-size: 11px;
+    background-color: #005f99;
+    display: inline-block;
+    padding: 2px 10px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.trendingproducts label {
+    color: #696969;
+    font-weight: 300;
+    font-size: 13px;
+    text-decoration: line-through;
+}
+.products__img {
+    overflow: hidden;
+    position: relative; 
+    justify-content: center;
+    display: flex;
+}
+.products__img img {
+    width: 180px;
+    padding: 10px 0px;
+}
+.products__img::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: .03;
+    border-radius: 12px;
+    pointer-events: none;
+}
+.trendingproducts p {
+    color: #696969;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 0px;
+    padding: 14px 0px 10px;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.main__price {
+    color: #000;
+    font-weight: 700;
+    font-size: 20px;
+}
+.discount__value {
+    color: #32cd32;
+    font-size: 13px;
+}
+.slick-prev:before, .slick-next:before { 
+    font-size: 25px !important;
+    line-height: 30px !important; 
+    color: white !important; 
+}
+.slick-prev, .slick-next { 
+    width: 25px !important;
+    height: 25px !important;
+  }
+  .slick-prev {
+    left: -10px !important;
+    z-index: 9999 !important;
+}
+.slick-next {
+    right: -10px !important;
+}
+.deals__sections{
+  margin: 80px 0px;
+}
+.getittoday{
+  text-align: center;
+}
+ .getittoday img{
+  width: 100%;
+  padding:0px 40px;
+ }
+ .great__deals{
+  text-align: center;
+ }
+.reliance__text998Select h2 {
+    font-size: 15px;
+    color: #000;
+    font-weight: 700;
+}
+.reliance__text998Select p {
+    font-size: 13px;
+    color: #696969;
+    font-weight: 400;
+}
+.reliance__text998Select h3 {
+    font-size: 15px;
+    color: #000;
+    font-weight: 700;
+}
+ .reliance__text998Select h4 {
+    font-size: 15px;
+    color: #000;
+    font-weight: 700;
+}
+.reliance__text998Select ul li {
+    font-size: 13px;
+    margin: 13px 0px;
 }

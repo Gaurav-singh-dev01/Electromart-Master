@@ -3,6 +3,11 @@
 *{
   font-family: "Poppins", sans-serif !important;
 }
+.header__function {
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+}
 .header-minitext{
         line-height: 30px;
 }
@@ -45,10 +50,10 @@ list-style:none;
     align-items: center;
 }
 .header-Electromart_logo img{
-    width:180px;
+    width:160px;
 }
 .header-Electromart_logo span {
-    border-left: 1px solid #000;
+    border-left: 1px solid #ffffff;
     font-size: 12px;
     padding: 0px 0px 0px 15px;
     margin: 0px 0px 0px 15px;
@@ -59,17 +64,28 @@ list-style:none;
     height: 40px;
 }
 .main_header_fixedItems {
-    padding: 0px 30px;
+    padding: 0px 30px 10px;
     background-color: #005f99;
 }
 .header-Electromart_search{
       background-color: #ffffff;
     border-radius: 30px;
 }
+ 
+.catlink {
+    align-self: center;
+} 
+.catlink a {
+    color: #ffffff !important;
+    padding: 0px !important;
+    margin-right: 0px;
+    font-size: 15px !important;
+}
 .box-shdw{
     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;    
-    margin-bottom: 50px;
-    padding:0px 30px;
+    margin-bottom: 5px;
+   padding: 0px 30px;
+    background-color: #ffffff;
 }
  :where(.css-dev-only-do-not-override-1cj4ms).ant-menu-light .ant-menu-item-group-title, :where(.css-dev-only-do-not-override-1cj4ms).ant-menu-light>.ant-menu .ant-menu-item-group-title{
     color: rgba(0, 0, 0, 1) !important;
@@ -196,9 +212,10 @@ list-style:none;
   width: 100%;
   justify-content: space-between;
   box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+  border-radius: 5px;
 }
 .mega-box .content .row{
-  width: calc(25% - 30px);
+  width: calc(100% - 0px);
   line-height: 45px;
 }
 .content .row img{
@@ -207,23 +224,31 @@ list-style:none;
   object-fit: cover;
 }
 .content .row header{
-  color: #f2f2f2;
-  font-size: 20px;
-  font-weight: 500;
+color: #f2f2f2;
+    font-size: medium;
+    font-weight: 500;
+}
+.major-floatingctaegory{
+  display: inline-flex;
+  width: 100%;
 }
 .content .row .mega-links{
-  margin-left: -40px;
-  border-left: 1px solid rgba(255,255,255,0.09);
+  margin-left: 0px;
+  padding-left: 0px;
 }
 .row .mega-links li{
-  padding: 0 20px;
+  padding: 0 30px 0px 0px;
 }
 .row .mega-links li a{
   padding: 0px;
-  padding: 0 20px;
+  padding: 0 30px 0px 0px;
   color: #d9d9d9;
-  font-size: 17px;
+  font-size: 12px;
   display: block;
+      line-height: 35px;
+}
+.mega-float{
+     width: 25%; 
 }
 .row .mega-links li a:hover{
   color: #f2f2f2;

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../loginComponent/img/login-bg.png'
 import '../loginComponent/login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faKey, faEye, faBackspace,faEyeSlash, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faKey, faEye, faBackspace,faEyeSlash, faChevronLeft, faHome } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
 
@@ -40,7 +40,8 @@ export default function Register() {
                   <button> Continue </button>
                 </div>
                 <div className='register-yourself'>
-                     <Link to="/Login"><FontAwesomeIcon icon={faChevronLeft} />Back to Login</Link>
+                     <Link to="/Login"><FontAwesomeIcon icon={faChevronLeft} />Back to Login</Link> <br/>
+                      <Link to="/Index"><FontAwesomeIcon icon={faHome} /> Visit Reliance Digital Select</Link>
                 </div>
               </div>
             </div>
