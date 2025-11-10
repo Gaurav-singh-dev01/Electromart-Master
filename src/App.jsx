@@ -7,9 +7,12 @@ import Register from './components/loginComponent/Register'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Footer from './components/footerComponent/Footer'
 import Header from './components/headerComponent/Header'
-import Index from './components'
 import Forget from './components/loginComponent/Forget'
-
+import Cart from './components/cart'
+import Index from './components'
+import Contact from './components/Contact'
+import Order from './components/Order'
+ 
 
 
 function App() {
@@ -22,8 +25,11 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/Login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/Forget" element={<Forget />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Index" element={<Index />} />
+          <Route path="/Register" element={<Register />} /> 
+           <Route path="/Index" element={<Index />} />
+           <Route path="/Cart" element={<Cart />} />
+           <Route path="/Contact" element={<Contact />} />
+           <Route path="/Order" element={<Order />} />
         </Routes>
         {isLoggedIn && <Footer />}
       </BrowserRouter>

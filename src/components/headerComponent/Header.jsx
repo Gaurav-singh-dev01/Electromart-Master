@@ -18,6 +18,7 @@ export default function Header() {
 
   return (
     <>
+    <div className='header__relative'>
     <div className='header__function'>
       <div className='color_blue'>
         <div className='container-fluid'>
@@ -26,8 +27,8 @@ export default function Header() {
             <div className='col-lg-12 col-md-12 col-12'>
               <div className='header-minitext text-end'>
                 <ul>
-                  <li> <Link to=""> Order</Link></li> &nbsp; &nbsp; &nbsp; &nbsp;
-                  <li> <Link to=""> Contact us</Link></li>&nbsp; &nbsp; &nbsp; &nbsp;
+                  <li> <Link to="/Order"> Order</Link></li> &nbsp; &nbsp; &nbsp; &nbsp;
+                  <li> <Link to="/Contact"> Contact us</Link></li>&nbsp; &nbsp; &nbsp; &nbsp;
                   <li> <Link to=""> Resource Center</Link></li> &nbsp; &nbsp; &nbsp; &nbsp;
                   <li> <Link to=""> Find a Store</Link></li>                  
                 </ul>
@@ -52,11 +53,11 @@ export default function Header() {
             </div>
             <div className='col-lg-3 col-md-3 col-sm-12 col-12 align-content-center'>
               <div className='megamenu-list'>
-                <ul>
+                <ul> 
+                  <li> <span> <ShoppingCartOutlined style={{ color:'white'}}/></span> <Link to='/Cart'> Cart </Link></li>
+                  <li> <span> <HeartOutlined style={{ color:'white'}}/></span> <Link to={''}> Wishlist </Link></li>
                   <li> <span> <UserAddOutlined style={{ color:'white'}}/></span> <Link to='/Register'> Sign up </Link></li>
                   <li> <span> <LoginOutlined style={{ color:'white'}}/></span> <Link to='/Login'> Login </Link></li>
-                  <li> <span> <ShoppingCartOutlined style={{ color:'white'}}/></span> <Link to={''}> Cart </Link></li>
-                  <li> <span> <HeartOutlined style={{ color:'white'}}/></span> <Link to={''}> Wishlist </Link></li>
                 </ul>
               </div>
             </div>
@@ -109,6 +110,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+</div>
 </div>
     </>
   )
