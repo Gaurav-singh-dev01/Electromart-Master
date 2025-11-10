@@ -12,6 +12,8 @@ import Cart from './components/cart'
 import Index from './components'
 import Contact from './components/Contact'
 import Order from './components/Order'
+import AirConditioners from './components/products/ac/airconditioners'
+ 
  
 
 
@@ -29,7 +31,8 @@ function App() {
            <Route path="/Index" element={<Index />} />
            <Route path="/Cart" element={<Cart />} />
            <Route path="/Contact" element={<Contact />} />
-           <Route path="/Order" element={<Order />} />
+           <Route path="/Order" element={<Order />} />    
+                   <Route path="/AirConditioners" element={<AirConditioners />} />  
         </Routes>
         {isLoggedIn && <Footer />}
       </BrowserRouter>

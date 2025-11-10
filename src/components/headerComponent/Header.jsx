@@ -69,41 +69,41 @@ export default function Header() {
           <div className="row">
               <div className='col-lg-12 col-md-12 col-sm-12 col-12'>
               <div className='myNav'>
-                <div class="wrapper">
+                <div className="wrapper">
 
                   <input type="radio" name="slider" id="menu-btn" />
                   <input type="radio" name="slider" id="close-btn" />
-                  <ul class="nav-links">
-                    <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+                  <ul className="nav-links">
+                    <label for="close-btn" className="btn close-btn"><i className="fas fa-times"></i></label>
 
                     <li>
-                      <a href="#" class="desktop-item"><img src={AC} className='img img-fluid' style={{width:'40px'}}/> Air Conditioners</a> 
+                      <Link to='/airconditioners' className="desktop-item"><img src={AC} className='img img-fluid' style={{width:'32px'}}/> Air Conditioners</Link> 
                     </li>
                     <li>
-                      <a href="#" class="desktop-item"><img src={TV} className='img img-fluid' style={{width:'40px'}}/> Televisions</a> 
+                      <Link to='' className="desktop-item"><img src={TV} className='img img-fluid' style={{width:'32px'}}/> Televisions</Link> 
                     </li>
                     <li>
-                      <a href="#" class="desktop-item"><img src={Washingmachine} className='img img-fluid' style={{width:'40px'}}/> Washing Machines</a> 
+                      <Link to='' className="desktop-item"><img src={Washingmachine} className='img img-fluid' style={{width:'32px'}}/> Washing Machines</Link> 
                     </li>
                     <li>
-                      <a href="#" class="desktop-item"><img src={Refrigerator} className='img img-fluid' style={{width:'40px'}}/> Refrigerators</a> 
+                      <Link to='' className="desktop-item"><img src={Refrigerator} className='img img-fluid' style={{width:'32px'}}/> Refrigerators</Link> 
                     </li>
                     <li>
-                      <a href="#" class="desktop-item"> <img src={microwave} className='img img-fluid' style={{width:'40px'}}/> Microwaves</a>
+                      <Link to='' className="desktop-item"> <img src={microwave} className='img img-fluid' style={{width:'32px'}}/> Microwaves</Link>
                       
                     </li>
                     <li>
-                      <a href="#" class="desktop-item"> <img src={kitchen} className='img img-fluid' style={{width:'40px'}}/> Kitchen Acessories</a> 
+                      <Link to='' className="desktop-item"> <img src={kitchen} className='img img-fluid' style={{width:'32px'}}/> Kitchen Acessories</Link> 
                     </li> 
                     <li>
-                      <a href="#" class="desktop-item"> <img src={Gyser} className='img img-fluid' style={{width:'40px'}}/> Gyser </a>
+                      <Link to='' className="desktop-item"> <img src={Gyser} className='img img-fluid' style={{width:'32px'}}/> Gyser </Link>
                        
                     </li>   
-                                        <li>
-                      <a href="#" class="desktop-item"> <img src={Speakers} className='img img-fluid' style={{width:'40px'}}/> Speakers </a>    
+                     <li>
+                      <Link to='' className="desktop-item"> <img src={Speakers} className='img img-fluid' style={{width:'32px'}}/> Speakers </Link>    
                     </li>                                        
                   </ul>
-                  <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+                  <label for="menu-btn" className="btn menu-btn"><i className="fas fa-bars"></i></label>
                 </div>
               </div>
             </div>
