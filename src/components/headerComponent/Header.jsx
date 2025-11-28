@@ -42,7 +42,7 @@ export default function Header() {
           <div className='row'>
             <div className='col-lg-3 col-md-3 col-sm-12 col-12'>
               <div className='header-Electromart_logo'>
-                <img src={electromartLogo} className='img img-fluid' />
+                <Link to='/Index'> <img src={electromartLogo} className='img img-fluid' /></Link>
                 <span> Powering Your World <br/>with Innovation </span>
               </div>
             </div>
@@ -77,7 +77,7 @@ export default function Header() {
                     <label for="close-btn" className="btn close-btn"><i className="fas fa-times"></i></label>
 
                     <li>
-                      <Link to='/airconditioners' className="desktop-item"><img src={AC} className='img img-fluid' style={{width:'32px'}}/> Air Conditioners</Link> 
+                      <Link to='/AirConditioners' className="desktop-item"><img src={AC} className='img img-fluid' style={{width:'32px'}}/> Air Conditioners</Link> 
                     </li>
                     <li>
                       <Link to='' className="desktop-item"><img src={TV} className='img img-fluid' style={{width:'32px'}}/> Televisions</Link> 

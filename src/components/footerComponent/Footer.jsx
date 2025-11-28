@@ -88,6 +88,11 @@ export default function Footer() {
                           <li><Link to=""> Washing Machines  </Link></li>
                           <li><Link to=""> Refregirators </Link> </li>
                           <li><Link to=""> Led TV </Link> </li>
+                          <li><Link to=""> Micorwaves </Link> </li>
+                          <li><Link to=""> Gysers </Link> </li>
+                          <li><Link to=""> Water Purifier </Link> </li>
+                          <li><Link to=""> Air Purifier </Link> </li>
+                          <li><Link to=""> Room Heater </Link> </li>
                         </ul>
                       </div>
                     </div>
@@ -182,7 +187,7 @@ export default function Footer() {
                 </div>
                 <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
                   <div className='copyright_reserved text-end'>
-                    <p>  In case of any concern, <Link to="#"> Contact Us </Link>  </p>
+                    <p>  In case of any concern, <Link to='/Contact'> Contact Us </Link>  </p>
                   </div>
                 </div>
               </div>

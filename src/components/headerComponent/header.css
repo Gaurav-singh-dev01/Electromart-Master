@@ -7,7 +7,7 @@
     position: relative;
     top: 0;
     width: 100%;
-    height: 145px;
+    height: 132px;
 }
 .header__function {
     width: 100%;
@@ -48,7 +48,7 @@ list-style:none;
 .color_blue{
         width: 100%;
     display: inline-flex;
-    padding: 0px 30px;
+    padding: 5px 30px 0px;
     background-color: #005f99;
 }
 .header-Electromart_logo {
@@ -56,7 +56,7 @@ list-style:none;
     align-items: center;
 }
 .header-Electromart_logo img{
-    width:160px;
+    width:120px;
 }
 .header-Electromart_logo span {
     border-left: 1px solid #ffffff;
@@ -70,7 +70,7 @@ list-style:none;
     height: 40px;
 }
 .main_header_fixedItems {
-    padding: 0px 30px 10px;
+    padding: 0px 30px 15px;
     background-color: #005f99;
 }
 .header-Electromart_search{

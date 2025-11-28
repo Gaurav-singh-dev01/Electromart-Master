@@ -11,7 +11,7 @@ export default function Cart() {
   return (
 <>
     <Header/>
-      <div className='container-fluid px-5 py-1 mb-5'>
+      <div className='container-fluid px-5 pt-3 mb-5'>
          <div className='row'>
                       <div className='col-lg-12 col-md-12 col-sm-12 col-12'>
                            <div className='breadcrum'>
@@ -22,11 +22,7 @@ export default function Cart() {
                                </ul>
                            </div>
                       </div>
-            <div className='col-lg-12 col-md-12 col-sm-12 col-12'>
-              <div className='heading__cart'>
-                <h1> My Cart </h1>
-              </div>
-            </div>
+ 
           <div className='col-lg-5 col-md-5 col-sm-12 col-12 m-auto'>
               <div className='display__cart__area'>
                    <img src={emptycart} className='img img-fluid'/>
