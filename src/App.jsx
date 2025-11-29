@@ -13,7 +13,7 @@ import Header from './components/headerComponent/Header'
 import Footer from './components/footerComponent/Footer'
 import AirConditionersCollections from './components/products/airconditioner/AirConditionersCollections'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ProductsPage from './components/products/page/Productspage'
+import ProductsPage from './components/products/page/Productspage';
 
 const queryClient = new QueryClient();
 
@@ -49,8 +49,8 @@ function App() {
 
             {/* ✅ Pagination Routes */}
             <Route path="/ProductsPage" element={<ProductsPage />} />
-            <Route path="/ProductsPage/page/:page" element={<ProductsPage />} />
-
+            <Route path="/product/:id" element={<ProductsPage />} />
+             
           </Routes>
 
           {isLoggedIn && <Footer />}

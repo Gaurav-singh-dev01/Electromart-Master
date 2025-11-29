@@ -20,9 +20,9 @@ export default function FilterSidebar({ filters, onChange }) {
   return (
     <>
       {/* HEADER */}
-      <h4 className="fw-bold d-flex justify-content-between">
+      <h4 className="fw-bold d-flex align-items-center justify-content-between summer--sale">
         Filters
-        <button className="btn btn-sm btn-outline-danger" onClick={clearFilters}>
+        <button className="btn btn-sm text-danger" onClick={clearFilters}>
           Clear All
         </button>
       </h4>

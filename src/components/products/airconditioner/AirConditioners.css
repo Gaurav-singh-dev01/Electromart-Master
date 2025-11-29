@@ -183,5 +183,23 @@ text-align: center;
     font-size: 12px;
 }
 .wishlist_ableclick{
-    
+position: relative;
+top: 0;
+right: 0;
+}
+.wishlist_ableclick span {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 9;
+}
+.card {
+    padding: 35px 8px 20px 8px !important;
+}
+.card-body { 
+    padding: 0px 0px !important; 
+}
+.cart_btn_id {
+    font-size: 12px !important;
+    margin: 0px 6px;
 }

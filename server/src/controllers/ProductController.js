@@ -60,7 +60,7 @@ exports.getProducts = async (req, res) => {
     const dataParams = [...params, Number(limit), Number(offset)];
 
     const [rows] = await pool.query(
-      `SELECT id, name, category, brand, price, rating, stock, image, description
+      `SELECT id, name, category, brand, price, rating, discountPercent, stock, image, description
 FROM products
        ${whereSql}
        ${orderBy}
@@ -95,4 +95,22 @@ exports.createProduct = (req, res) => {
      message: "Product created successfully",
      product: { name, price }
    });
+};
+
+exports.getProductById = async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      "SELECT * FROM products WHERE id = ?",
+      [req.params.id]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.json(rows[0]);
+  } catch (err) {
+    console.error("getProductById error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 };
