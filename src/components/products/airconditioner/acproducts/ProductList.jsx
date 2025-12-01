@@ -41,7 +41,7 @@ const navigate = useNavigate();
         ) : (
           products.map((item, index) => (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={item.id}>
-      <Link to={`/product/${item.id}`} className="text-decoration-none">
+             <Link to={`/product/${item.slug}`} className="text-decoration-none">
               {item.stock === 0 && (
                 <div className="position-relative top-0 start-0">
                   <span className="badge bg-danger position-absolute top-0 z-3 start-0 m-2">

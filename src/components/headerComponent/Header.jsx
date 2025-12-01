@@ -16,6 +16,16 @@ import Gyser from '../headerComponent/img/geyser.png'
 import Speakers from '../headerComponent/img/speakers.png'
 export default function Header() {
 
+const [cartCount, setCartCount] = useState(
+  Number(localStorage.getItem("cartCount")) || 0
+);
+useEffect(() => {
+  const updateCount = () => {
+    setCartCount(Number(localStorage.getItem("cartCount")) || 0);
+  };
+  window.addEventListener("storage", updateCount);
+  return () => window.removeEventListener("storage", updateCount);
+}, []);
   return (
     <>
     <div className='header__relative'>
@@ -54,8 +64,11 @@ export default function Header() {
             <div className='col-lg-3 col-md-3 col-sm-12 col-12 align-content-center'>
               <div className='megamenu-list'>
                 <ul> 
-                  <li> <span> <ShoppingCartOutlined style={{ color:'white'}}/></span> <Link to='/Cart'> Cart </Link></li>
-                  <li> <span> <HeartOutlined style={{ color:'white'}}/></span> <Link to={''}> Wishlist </Link></li>
+                  <li> <span> {cartCount > 0 && (
+    <span className="badge bg-danger ms-1 cC_098">{cartCount}</span>
+  )}
+  <ShoppingCartOutlined style={{ color:'white'}}/></span> <Link to='/Cart'>  Cart </Link></li>
+                  <li> <span> <HeartOutlined style={{ color:'white'}}/></span> <Link to='/Wishlist'> Wishlist </Link></li>
                   <li> <span> <UserAddOutlined style={{ color:'white'}}/></span> <Link to='/Register'> Sign up </Link></li>
                   <li> <span> <LoginOutlined style={{ color:'white'}}/></span> <Link to='/Login'> Login </Link></li>
                 </ul>
