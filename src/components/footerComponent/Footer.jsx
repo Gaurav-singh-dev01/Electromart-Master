@@ -166,7 +166,7 @@ export default function Footer() {
                     <div className='newsletter_area'>
                       <span>Join our newsletter</span><br />
                       <input type="text" placeholder='Newsletter' />
-                      <Link to='' ><FontAwesomeIcon icon={faChevronCircleRight} size="30px" /> </Link>
+                      <Link to=''><FontAwesomeIcon icon={faChevronCircleRight} size="30px" /> </Link>
                     </div>
                   </div>
                 </div>

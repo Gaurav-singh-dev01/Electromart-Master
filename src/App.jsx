@@ -14,6 +14,7 @@ import Footer from './components/footerComponent/Footer'
 import AirConditionersCollections from './components/products/airconditioner/AirConditionersCollections'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProductsPage from './components/products/page/Productspage';
+import Wishlist from './components/Wishlist';
 
 const queryClient = new QueryClient();
 
@@ -42,14 +43,13 @@ function App() {
             <Route path="/Cart" element={<Cart />} />
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Order" element={<Order />} />
-
+             <Route path="/Wishlist" element={<Wishlist />} />
             {/* Products */}
             <Route path="/AirConditioners" element={<AirConditioners />} />
             <Route path="/AirConditionersCollections" element={<AirConditionersCollections />} />
 
-            {/* ✅ Pagination Routes */}
-            <Route path="/ProductsPage" element={<ProductsPage />} />
-            <Route path="/product/:id" element={<ProductsPage />} />
+            {/* ✅ Pagination Routes */} 
+           <Route path="/product/:slug" element={<ProductsPage />} />
              
           </Routes>
 

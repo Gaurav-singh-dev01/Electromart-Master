@@ -60,7 +60,7 @@ exports.getProducts = async (req, res) => {
     const dataParams = [...params, Number(limit), Number(offset)];
 
     const [rows] = await pool.query(
-      `SELECT id, name, category, brand, price, rating, discountPercent, stock, image, description
+      `SELECT id, name, category, brand, price, rating, discountPercent, stock, image, description, slug
 FROM products
        ${whereSql}
        ${orderBy}
@@ -99,9 +99,13 @@ exports.createProduct = (req, res) => {
 
 exports.getProductById = async (req, res) => {
   try {
-    const [rows] = await db.query(
-      "SELECT * FROM products WHERE id = ?",
-      [req.params.id]
+    const rawSlug = req.params.slug;
+    const slug = String(rawSlug || "").toLowerCase();
+    console.log("Controller getProductById slug:", slug);
+
+    const [rows] = await pool.query(
+      "SELECT * FROM products WHERE LOWER(slug) = ?",
+      [slug]
     );
 
     if (rows.length === 0) {
@@ -111,6 +115,40 @@ exports.getProductById = async (req, res) => {
     res.json(rows[0]);
   } catch (err) {
     console.error("getProductById error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+function createSlug(name) {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')  // Only a-z, 0-9 and hyphens
+    .replace(/^-+|-+$/g, '');     // Trim leading/trailing hyphens
+}
+exports.createProduct = async (req, res) => {
+  try {
+    const { name, price } = req.body;
+
+    if (!name || !price) {
+      return res.status(400).json({ message: "Name and price required" });
+    }
+
+    // 🔹 Generate slug
+    const slug = createSlug(name);
+
+    // 🔹 Insert into DB
+    const [result] = await pool.query(
+      "INSERT INTO products (name, price, slug) VALUES (?, ?, ?)",
+      [name, price, slug]
+    );
+
+    res.status(201).json({
+      message: "Product created successfully",
+      product: { id: result.insertId, name, price, slug }
+    });
+  } catch (err) {
+    console.error("createProduct error:", err);
     res.status(500).json({ message: "Server error" });
   }
 };

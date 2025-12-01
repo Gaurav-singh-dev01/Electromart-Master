@@ -203,3 +203,140 @@ right: 0;
     font-size: 12px !important;
     margin: 0px 6px;
 }
+.dB__09_id {
+    margin: 10px 0px 20px;
+}
+.detailed_product_access {
+    padding: 40px 0px;
+    background-color: #ffffff;
+    justify-content: space-between;
+}
+.pT_99_tye {
+    padding: 27px 0px;
+    margin: 0px 0px 0px 30px;
+    width: 35% !important;
+       border: 1px solid #f5f5f5;
+}
+.pT_99_ytuy {
+    margin: 0px 20px 0px 0px;
+    width: 60% !important;
+    padding: 30px 0px;
+    border: 1px solid #f5f5f5;
+}
+.pT_99_ytuy h3 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.all_products_wishlistBTN {
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important; 
+    border-radius: 50%;
+    line-height: 38px;
+    height: 40px;
+    width: 42px;
+}
+.all_products_wishlistBTN span svg {
+    font-size: 14px !important;
+}
+.id__767light {
+    color: #828282;
+    font-weight: 300;
+    font-size: 13px;
+}
+.delivery_related {
+    width: 30%;
+}
+.pincode-check .form-label {
+    font-size: 15px;
+    font-weight: 600;
+}
+.addBtn {
+    border: 1px solid #bfbfbf !important;
+    background-color: rgb(0 95 153) !important;
+    color: #000 !important;
+    font-size: 13px !important;
+    margin-bottom: 22px;
+    width: 18%;
+    color: #ffffff !important;
+}
+.goCartBtn{
+    border: 1px solid #bfbfbf !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #000 !important;
+    font-size: 13px !important;
+    margin-bottom: 22px;
+    width: 18%;
+}
+.features-box {
+  position: relative;
+}
+.features-box.fade::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(to bottom, transparent, #fff);
+}
+.left-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Image + Slider bottom */
+  height: 100%; /* Match height with right box */
+}
+.swiper-bottom {
+  margin-top: auto;   /* Push to bottom */
+}
+.arrow_btnshow {
+    color: #000;
+    font-size: 13px;
+    text-transform: capitalize;
+    border-bottom: none;
+    text-decoration: none;
+}
+.arrow_btnshow svg {
+    font-size: 10px;
+    margin-left: 5px;
+}
+.PC_india{
+position:relative;
+top:0;
+right: 0px;
+}
+.PC_india .delivery_related {
+    position: absolute;
+    top: 35px;
+    right: 20px;
+}
+.apy_451_id {
+    border: 1px solid #bfbfbf !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #000 !important;
+    font-size: 13px !important;
+    margin-bottom: 22px; 
+    border-radius: 7px;
+}
+.delivery-msg {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-out;
+  background: #f7f7f7;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+:root {
+    --swiper-navigation-size: 20px !important;
+}
+.input_btnpin{
+        border: 1px solid #bfbfbf !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #000 !important;
+    font-size: 13px !important;
+    margin-bottom: 22px;
+    width: 18%;
+}
