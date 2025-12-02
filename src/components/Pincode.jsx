@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import fastdlvry from "/public/Products/fast-delivery.png"
+import nocod from '/Products/nocod.png'
 export default function Pincode({ onResult }) {
   const [pincode, setPincode] = useState(localStorage.getItem("lastPincode") || "");
   const [loading, setLoading] = useState(false);
@@ -53,8 +54,14 @@ if (onResult) onResult(json);
         <button className="apy_451_id" onClick={handleCheck} disabled={loading}>
           {loading ? "Checking..." : "Apply"}
         </button>
-      </div>
 
+      </div>
+        <div className="mod_viaPin">
+            <ul>
+               <li><img src={fastdlvry} className="img img-fluid"/> FREE Delivery by tomorrow</li>
+                <li><img src={nocod} className="img img-fluid"/> COD Not Available</li>
+            </ul>
+        </div>
       {message && (
         <div className={`mt-2 alert ${message.type === "ok" ? "alert-success" : "alert-danger"}`}>
           {message.text}

@@ -128,7 +128,7 @@ useEffect(() => {
 }, [alertMessage]);
 
 
-  const [showMore, setShowMore] = useState(false);
+ 
   // Loading / 404
   if (loading) return <><Header /><h2 className="text-center p-4">Loading...</h2><Footer /></>;
   if (!product) return <><Header /><h2 className="text-center p-4">Product Not Found</h2><Footer /></>;
@@ -187,23 +187,16 @@ useEffect(() => {
 
             {/* SLIDER ALWAYS BOTTOM */}
             <div style={{ marginTop: "auto" }}>
-              <Swiper
-                modules={[Navigation]}
-                navigation
-                spaceBetween={8}
-                slidesPerView={5}
-                className="mt-3 swiper-bottom"
-              >
-                {product.images.map((img, i) => (
-                  <SwiperSlide key={i} onClick={() => setActiveImg(img)}>
-                    <img
-                      src={img}
-                      className={`img-fluid border rounded p-1 ${activeImg === img ? "border-primary" : "border-secondary"}`}
-                      style={{ height: "70px", objectFit: "contain", padding: "12px 10px", cursor: "pointer" }}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+<Swiper modules={[Navigation]} navigation spaceBetween={10} slidesPerView={5} className="mt-3 swiper-bottom">
+  {product.images.map((img, i) => (
+    <SwiperSlide key={i} onClick={() => setActiveImg(img)}>
+      <img
+        src={img}
+        className={`thumb-img ${activeImg === img ? "selected-thumb" : ""}`}
+      />
+    </SwiperSlide>
+  ))}
+</Swiper>
             </div>
           </div>
 
@@ -265,27 +258,20 @@ useEffect(() => {
             <div className="border-bottom mb-3"></div>
 
             <label style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px" }}>
-              Key Features
+              About this item
             </label>
 
             {/* DESCRIPTION SHOW MORE / LESS */}
-            <ul style={{ listStyle: "disc", paddingLeft: "14px" }}>
-              {(showMore ? product.description?.split("\n") : product.description?.split("\n").slice(0, 2)).map((line, index) => (
-                <li key={index} style={{ fontSize: "13px", marginBottom: "10px" }}>
-                  {line}
-                </li>
-              ))}
-            </ul>
-
-            {product.description?.split("\n").length > 2 && (
-              <button
-                className="btn p-0"
-                style={{ fontSize: "14px" }}
-                onClick={() => setShowMore(!showMore)}
-              >
-                {showMore ? <span className="arrow_btnshow">Show Less<FontAwesomeIcon icon={faChevronUp} /></span> : <span className="arrow_btnshow"> Show More<FontAwesomeIcon icon={faChevronDown} /></span>}
-              </button>
-            )}
+<ul style={{ listStyle: "disc", paddingLeft: "14px" }}>
+  {product.description
+    ? product.description.split("\n").map((line, index) => (
+        <li key={index} style={{ fontSize: "13px", marginBottom: "10px" }}>
+          {line}
+        </li>
+      ))
+    : <li>No description available</li>
+  }
+</ul>
 
 
           </div>

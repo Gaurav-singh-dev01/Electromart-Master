@@ -215,7 +215,10 @@ right: 0;
     padding: 27px 0px;
     margin: 0px 0px 0px 30px;
     width: 35% !important;
-       border: 1px solid #f5f5f5;
+    border: 1px solid #f5f5f5;
+    position: sticky;
+    top: 90px; 
+    height: fit-content !important;
 }
 .pT_99_ytuy {
     margin: 0px 20px 0px 0px;
@@ -306,7 +309,7 @@ right: 0px;
 }
 .PC_india .delivery_related {
     position: absolute;
-    top: 35px;
+    top: -3px;
     right: 20px;
 }
 .apy_451_id {
@@ -314,7 +317,7 @@ right: 0px;
     background-color: rgba(0, 0, 0, 0) !important;
     color: #000 !important;
     font-size: 13px !important;
-    margin-bottom: 22px; 
+    margin-bottom: 5px; 
     border-radius: 7px;
 }
 .delivery-msg {
@@ -332,11 +335,48 @@ right: 0px;
 :root {
     --swiper-navigation-size: 20px !important;
 }
-.input_btnpin{
-        border: 1px solid #bfbfbf !important;
+.input_btnpin {
+    border: 1px solid #bfbfbf !important;
     background-color: rgba(0, 0, 0, 0) !important;
     color: #000 !important;
     font-size: 13px !important;
-    margin-bottom: 22px;
-    width: 18%;
+    margin-bottom: 5px;
+    height: 36px;
+}
+.thumb-img {
+  width: 70px;
+  height: 60px;
+  object-fit: contain;
+  padding: 6px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  opacity: 0.6;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+.thumb-img:hover {
+  opacity: 1;
+}
+.thumb-img.selected-thumb {
+  border-color: #007bff !important;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+.selected-thumb {
+  border: 2px solid #007bff !important; /* Blue Border */
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+.mod_viaPin ul {
+    padding: 0px;
+    list-style: none;
+}
+.mod_viaPin ul li {
+    font-size: 12px;
+}
+.mod_viaPin ul li img {
+    width: 18px;
 }
