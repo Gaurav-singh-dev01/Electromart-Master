@@ -16,6 +16,7 @@ import dicountedbanner from '/public/products/ac/discounted_banners.jpg';
 // Set default baseURL for axios
 axios.defaults.baseURL = "http://localhost:5000/api";
 
+
 export default function ProductsPage() {
 
   const { slug } = useParams();
@@ -52,18 +53,8 @@ const [alertType, setAlertType] = useState("success");
 
         // Images
         const baseImage = data.image || "";
-        const extras = [
-          "/Products/AC/Hitachi-R32-RAS.G312PCBISS/HITACHI-SAC-RAS.G312PCBISS.png",
-          "/Products/AC/Hitachi-R32-RAS.G312PCBISS/HITACHI-SAC-RAS.G312PCBISS.png",
-          "/Products/AC/Hitachi-R32-RAS.G312PCBISS/HITACHI-SAC-RAS.G312PCBISS.png",
-          "/Products/AC/Hitachi-R32-RAS.G312PCBISS/HITACHI-SAC-RAS.G312PCBISS.png",
-          "/Products/AC/Hitachi-R32-RAS.G312PCBISS/HITACHI-SAC-RAS.G312PCBISS.png",
-          "/Products/AC/Hitachi-R32-RAS.G312PCBISS/HITACHI-SAC-RAS.G312PCBISS.png",
-        ];
-        data.images = [baseImage, ...extras].filter(Boolean);
-
-        setProduct(data);
-        setActiveImg(baseImage || data.images[0]);
+setProduct(data);
+setActiveImg(data?.images?.length ? data.images[0] : data.image);
 
         // Check if already in cart
         const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
@@ -127,8 +118,12 @@ useEffect(() => {
   return () => clearTimeout(timer); // cleanup previous timer
 }, [alertMessage]);
 
+const [showMore, setShowMore] = useState(false);
+const lines = product?.description?.split("\n") || [];
+const visibleLines = showMore ? lines : lines.slice(0, 3);
 
- 
+ const [showRelatedImages, setShowRelatedImages] = useState(true);
+ const [showSpecs, setShowSpecs] = useState(true);
   // Loading / 404
   if (loading) return <><Header /><h2 className="text-center p-4">Loading...</h2><Footer /></>;
   if (!product) return <><Header /><h2 className="text-center p-4">Product Not Found</h2><Footer /></>;
@@ -162,43 +157,68 @@ useEffect(() => {
         <div className="row detailed_product_access" style={{ display: "flex", gap: "15px" }}>
 
           {/* LEFT BOX */}
-          <div className="col-md-4 text-center pT_99_tye left-box"
-            style={{ display: "flex", flexDirection: "column" }}>
+  <div className="col-md-4 pT_99_tye left-box">
 
-            {/* Wishlist */}
-            <div className="d-flex justify-content-end gap-3 mb-2">
-              <div className="all_products_wishlistBTN">
-                <span onClick={handleWishlist} style={{ cursor: "pointer" }}>
-                  <FontAwesomeIcon
-                    icon={isWishlisted ? solidHeart : regularHeart}
-                    className={`wishlist-btn ${animate ? "animate" : ""}`}
-                    style={{ fontSize: "20px", color: isWishlisted ? "red" : "#444" }}
-                  />
-                </span>
-              </div>
-            </div>
-
-            {/* Main Image */}
-            <img
-              src={activeImg}
-              className="img-fluid mb-3"
-              style={{ maxHeight: "250px", objectFit: "contain", padding: "80px 0px" }}
-            />
-
-            {/* SLIDER ALWAYS BOTTOM */}
-            <div style={{ marginTop: "auto" }}>
-<Swiper modules={[Navigation]} navigation spaceBetween={10} slidesPerView={5} className="mt-3 swiper-bottom">
-  {product.images.map((img, i) => (
+<div className="d-inline-flex">
+  {/* 🔥 Vertical Thumbnail Slider */}
+  <div style={{height: "320px" }}>
+    <Swiper
+      modules={[Navigation]}
+      direction="vertical"
+      navigation
+      spaceBetween={10}
+      slidesPerView={4}
+      style={{ height: "100%" }}
+      className="thumbnail-swiper"
+    >
+{Array.isArray(product.images) && product.images.length > 0 ? (
+  product.images.map((img, i) => (
     <SwiperSlide key={i} onClick={() => setActiveImg(img)}>
       <img
         src={img}
-        className={`thumb-img ${activeImg === img ? "selected-thumb" : ""}`}
+        style={{
+          width: "100%",
+          height: "50px",
+          objectFit: "cover",
+          borderRadius: "6px",
+          cursor: "pointer",
+          border: activeImg === img ? "2px solid #007bff" : "1px solid #ccc",
+          background: "#fff",
+          padding: "1px",
+        }}
       />
     </SwiperSlide>
-  ))}
-</Swiper>
-            </div>
-          </div>
+  ))
+) : (
+  <p>No images found</p>
+)}
+    </Swiper>
+  </div>
+
+  {/* 🔥 Main Image + Wishlist */}
+  <div style={{ flexGrow: 1, position: "relative", textAlign: "center",  margin: 'auto 0px' }}>
+    {/* Wishlist button */}
+    <div style={{ position: "absolute", right: "5px", top: "5px", zIndex: 10 }}>
+      <span onClick={handleWishlist} style={{ cursor: "pointer" }}>
+        <FontAwesomeIcon
+          icon={isWishlisted ? solidHeart : regularHeart}
+          className={`wishlist-btn ${animate ? "animate" : ""}`}
+          style={{ fontSize: "22px", color: isWishlisted ? "red" : "#444" }}
+        />
+      </span>
+    </div>
+
+    {/* Main Image */}
+    <img
+      src={activeImg}
+      className="img-fluid"
+      style={{width: "100%"}}
+    />
+  </div>
+</div>
+
+
+  </div>
 
           {/* RIGHT BOX */}
           <div className="col-md-8 pT_99_ytuy"
@@ -248,9 +268,16 @@ useEffect(() => {
                 </div>
               </>
             ) : (
+              <>
+              <div className="d-flex">
               <button onClick={handleAddToCart} className="addBtn btn btn-primary">
                 Add to Cart
+              </button> &nbsp; &nbsp;&nbsp; 
+              <button onClick={handleAddToCart} className="buynow_btn btn btn-success">
+                Buy Now
               </button>
+              </div>
+              </>
             )}
 
 
@@ -261,19 +288,120 @@ useEffect(() => {
               About this item
             </label>
 
+<div className="about_this_prouct">
             {/* DESCRIPTION SHOW MORE / LESS */}
-<ul style={{ listStyle: "disc", paddingLeft: "14px" }}>
-  {product.description
-    ? product.description.split("\n").map((line, index) => (
-        <li key={index} style={{ fontSize: "13px", marginBottom: "10px" }}>
-          {line}
-        </li>
-      ))
-    : <li>No description available</li>
-  }
+<ul>
+  {visibleLines.map((line, index) => (
+    <li key={index}>{line}</li>
+  ))}
 </ul>
 
+{lines.length > 3 && (
+  <button className="more_less" onClick={() => setShowMore(!showMore)}>
+    {showMore ? (
+      <>
+        Show Less
+        <FontAwesomeIcon icon={faChevronUp}/>        
+      </>
+    ) : (
+      <> 
+        Show More
+        <FontAwesomeIcon icon={faChevronDown} />
+      </>
+    )}
+  </button>
+)}
+</div>
 
+<div className="border-bottom my-3"></div>
+
+<div className="notice-issue">
+    <p> Notice any issue? <Link to="/contact"> Report Here</Link> </p>
+</div>
+
+<div className="Description_ID098 mt-4">
+  <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    cursor: "pointer",
+    marginBottom: "10px"
+  }}
+  onClick={() => setShowRelatedImages(!showRelatedImages)} // toggle
+>
+  <p className="fw-bold mb-0">Description</p>
+  <FontAwesomeIcon
+    icon={showRelatedImages ? faChevronUp : faChevronDown}
+    style={{ fontSize: "16px" }}
+  />
+</div>
+{showRelatedImages && (
+  <div
+    style={{
+      display: "flex",
+      gap: "12px",
+      flexWrap: "wrap",
+      justifyContent: "flex-start",
+    }}
+  >
+{Array.isArray(product.descriptionImages) && product.descriptionImages.length > 0 ? (
+  product.descriptionImages.map((img, index) => (
+    <img
+      key={index}
+      src={img}
+      alt={`desc-img-${index}`}
+      style={{ 
+        borderRadius: "8px",  
+        background: "#fff",
+        objectFit: "contain",
+        padding: "6px",
+        width: '70%',
+         margin: 'auto'
+      }}
+    />
+  ))
+) : (
+  <p className="text-muted">No description images available.</p>
+)}
+  </div>
+)}
+</div>
+
+
+<div className="Specifications_ID098 mt-4">
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      cursor: "pointer",
+      marginBottom: "10px",
+    }}
+    onClick={() => setShowSpecs(!showSpecs)}
+  >
+    <p className="fw-bold mb-0">Product Specifications</p>
+    <FontAwesomeIcon icon={showSpecs ? faChevronUp : faChevronDown} style={{ fontSize: "16px" }} />
+  </div>
+
+{showSpecs && (
+  <table className="table table-bordered" style={{ fontSize: "14px" }}>
+    <tbody>
+      {product.specifications?.split("\n").map((line, index) => {
+        const parts = line.split(":");
+        const key = parts.shift(); // Pehla part
+        const value = parts.join(":"); // Baaki jod denge
+        return (
+          <tr key={index}>
+            <td style={{ width: "40%", fontWeight: "600" }}>{key}</td>
+            <td>{value}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+)}
+</div>
           </div>
         </div>
       </div>

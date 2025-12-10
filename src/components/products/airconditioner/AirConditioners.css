@@ -258,17 +258,24 @@ right: 0;
     background-color: rgb(0 95 153) !important;
     color: #000 !important;
     font-size: 13px !important;
-    margin-bottom: 22px;
-    width: 18%;
+    margin-bottom: 22px; 
     color: #ffffff !important;
+}
+.buynow_btn {
+    border: 1px solid #bfbfbf !important;
+    background-color: #1A8754;
+    color: #000 !important;
+    font-size: 13px !important;
+    margin-bottom: 22px; 
+    color: #ffffff !important;
+        border-radius: 5px;
 }
 .goCartBtn{
     border: 1px solid #bfbfbf !important;
     background-color: rgba(0, 0, 0, 0) !important;
     color: #000 !important;
     font-size: 13px !important;
-    margin-bottom: 22px;
-    width: 18%;
+    margin-bottom: 22px; 
 }
 .features-box {
   position: relative;
@@ -372,7 +379,7 @@ right: 0px;
 
 .mod_viaPin ul {
     padding: 0px;
-    list-style: none;
+    list-style: none; 
 }
 .mod_viaPin ul li {
     font-size: 12px;
@@ -380,3 +387,34 @@ right: 0px;
 .mod_viaPin ul li img {
     width: 18px;
 }
+.about_this_prouct ul {
+    /* list-style: none; */
+    padding: 0px 14px;
+}
+.about_this_prouct ul li {
+    font-size: 13px;
+    list-style: disc;
+    margin-bottom: 10px;
+}
+.more_less {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 12px;
+    gap: 5px;
+    display: flex;
+    /* align-self: center; */
+    align-items: center;
+}
+.notice-issue{
+
+}
+.notice-issue p {
+    font-weight: 700;
+    display: block;
+}
+.notice-issue p a {
+    margin-left: 2px;
+    text-decoration: none;
+    color: #005f99;
+}
+ 

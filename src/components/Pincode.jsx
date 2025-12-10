@@ -54,7 +54,6 @@ if (onResult) onResult(json);
         <button className="apy_451_id" onClick={handleCheck} disabled={loading}>
           {loading ? "Checking..." : "Apply"}
         </button>
-
       </div>
         <div className="mod_viaPin">
             <ul>

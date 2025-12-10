@@ -557,3 +557,44 @@ input:disabled {
     border: 1px solid #ccc !important;
     font-size: 11px !important;
 }
+.coupon_code {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    justify-content: space-between;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    padding: 12px 12px;
+}
+.coupon_text_img img {
+        width: 40px;
+} 
+.coupon_text_img span {
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+}
+.coupon_code svg {
+    font-size: 14px;
+    color: #000;
+}
+.Id_cart123 h5{
+        text-overflow: ellipsis;
+    width: 59%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.Id_cart123 p{
+        text-overflow: ellipsis;
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.Id_cart123 h6{
+        text-overflow: ellipsis;
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+}

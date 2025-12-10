@@ -15,6 +15,7 @@ app.use(express.static("public"));
 // Routes
 app.use("/api/products", require("./src/routes/products"));
 app.use("/api/pincode", require("./src/routes/pincode"));
+app.use("/api/upload-excel", require("./src/routes/uploadExcel")); 
 
 // Test route
 app.get("/", (req, res) => res.send("Backend API is running..."));
@@ -24,3 +25,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+ 

@@ -1,4 +1,7 @@
 const pool = require('../../src/db'); 
+const XLSX = require("xlsx");
+const path = require("path");
+
 exports.getProducts = async (req, res) => {
   try {
     const {
@@ -99,20 +102,35 @@ exports.createProduct = (req, res) => {
 
 exports.getProductById = async (req, res) => {
   try {
-    const rawSlug = req.params.slug;
-    const slug = String(rawSlug || "").toLowerCase();
-    console.log("Controller getProductById slug:", slug);
+    const slug = String(req.params.slug || "").toLowerCase();
 
     const [rows] = await pool.query(
       "SELECT * FROM products WHERE LOWER(slug) = ?",
       [slug]
     );
 
-    if (rows.length === 0) {
-      return res.status(404).json({ message: "Product not found" });
-    }
+    if (rows.length === 0) return res.status(404).json({ message: "Product not found" });
 
-    res.json(rows[0]);
+    const product = rows[0];
+
+    // Thumbnail + main images
+    const [imgRows] = await pool.query(
+      "SELECT image FROM product_images WHERE product_id = ?",
+      [product.id]
+    );
+
+    const extraImages = imgRows.map(row => row.image);
+    product.images = [product.image, ...extraImages];
+
+    // Description images
+    const [descImgRows] = await pool.query(
+      "SELECT image_url FROM product_description_images WHERE product_id = ?",
+      [product.id]
+    );
+
+    product.descriptionImages = descImgRows.map(img => img.image_url);
+
+    return res.json(product);
   } catch (err) {
     console.error("getProductById error:", err);
     res.status(500).json({ message: "Server error" });
@@ -150,5 +168,35 @@ exports.createProduct = async (req, res) => {
   } catch (err) {
     console.error("createProduct error:", err);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+ 
+exports.uploadProductsExcel = async (req, res) => {
+  try {
+    const filePath = path.join(__dirname, "../uploads/", req.file.filename);
+    const workbook = XLSX.readFile(filePath);
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const products = XLSX.utils.sheet_to_json(sheet);
+
+    for (let p of products) {
+      await pool.query(
+        "INSERT INTO products (name, category, brand, price, image, description, slug) VALUES (?,?,?,?,?,?,?)",
+        [
+          p.name,
+          p.category,
+          p.brand,
+          p.price,
+          p.image,
+          p.description,
+          generateSlug(p.name),
+        ]
+      );
+    }
+
+    res.json({ message: "Products uploaded successfully!" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Import failed" });
   }
 };
