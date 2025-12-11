@@ -1,157 +1,101 @@
-// server/src/routes/products.js
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const XLSX = require("xlsx");
-const pool = require("../db"); // your DB connection (mysql2/promise pool or similar)
-const fs = require("fs");
+const pool = require("../db");
+const fs = require("fs"); 
+const productCtrl = require("../controllers/ProductController");
+ 
 
-// --- Multer config: save into <server-root>/uploads ---
+// GET all products (main listing API)
+router.get("/", productCtrl.getProducts);
+
+// GET single product by slug
+router.get("/slug/:slug", productCtrl.getProductById);
+ 
+// Safe trim
+function safeTrim(val) {
+  return val ? String(val).trim() : "";
+}
+
+// Upload folder create if missing
 const uploadsDir = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
-const storage = multer.diskStorage({
+// Multer config
+const storage = multer.memoryStorage({
   destination: (req, file, cb) => cb(null, uploadsDir),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+  filename: (req, file, cb) =>
+    cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "_")),
 });
 const upload = multer({ storage });
+ 
 
-// ---------------------- ROUTES ----------------------
-
-// 1) Get all products (frontend list)
-router.get("/", async (req, res) => {
-  try {
-    const [rows] = await pool.query("SELECT * FROM products");
-    // Return an object with products key so frontend helpers expecting res.data.products work
-    return res.json({ products: rows });
-  } catch (err) {
-    console.error("GET /products error:", err);
-    return res.status(500).json({ message: "Server error", error: err.message });
-  }
-});
-
-// 2) Get product by slug (for product page)
-router.get("/slug/:slug", async (req, res) => {
-  try {
-    const slugParam = String(req.params.slug || "").toLowerCase().trim();
-
-    const [productRows] = await pool.query(
-      "SELECT * FROM products WHERE LOWER(slug) = ? LIMIT 1",
-      [slugParam]
-    );
-
-    if (!productRows || productRows.length === 0) {
-      return res.status(404).json({ message: "Product not found" });
-    }
-
-    const product = productRows[0];
-
-    // Ensure product has consistent fields expected by frontend
-    // images: array (if you store extra images in separate table, fetch them; otherwise fallback to product.image)
-    try {
-      const [imageRows] = await pool.query(
-        "SELECT image FROM product_images WHERE product_id = ?",
-        [product.id]
-      );
-      const extraImages = Array.isArray(imageRows) ? imageRows.map((r) => r.image).filter(Boolean) : [];
-      product.images = [];
-      if (product.image) product.images.push(product.image);
-      product.images = product.images.concat(extraImages);
-    } catch (err) {
-      // if product_images table doesn't exist or query fails, just fallback
-      product.images = product.image ? [product.image] : [];
-    }
-
-    // descriptionImages: array (optional table)
-    try {
-      const [descRows] = await pool.query(
-        "SELECT image_url FROM product_description_images WHERE product_id = ?",
-        [product.id]
-      );
-      product.descriptionImages = Array.isArray(descRows) ? descRows.map((r) => r.image_url).filter(Boolean) : [];
-    } catch (err) {
-      product.descriptionImages = [];
-    }
-
-    // Ensure other fields exist so frontend won't crash
-    product.specifications = product.specifications || "";
-    product.rating = product.rating || 0;
-    product.discountPercent = product.discountPercent || 0;
-    product.stock = typeof product.stock === "number" ? product.stock : (product.stock ? Number(product.stock) : 0);
-
-    return res.json(product);
-  } catch (err) {
-    console.error("GET /slug/:slug error:", err);
-    return res.status(500).json({ message: "Server error", error: err.message });
-  }
-});
-
-// 3) Upload Excel & insert into DB
+// -------------------------------------------------
+// 🟩 FINAL — EXCEL UPLOAD ROUTE
+// -------------------------------------------------
 router.post("/upload-excel", upload.single("excel"), async (req, res) => {
   try {
+    const override = req.query.override === "true";
+
     if (!req.file) return res.status(400).json({ message: "No file uploaded" });
 
-    const filePath = path.join(uploadsDir, req.file.filename);
+    // Read Excel from buffer
+    const workbook = XLSX.read(req.file.buffer);
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
-    // Read workbook
-    const workbook = XLSX.readFile(filePath);
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-    const rows = XLSX.utils.sheet_to_json(sheet, { defval: null });
+    if (!rows.length) return res.status(400).json({ message: "Excel is empty" });
 
-    if (!Array.isArray(rows) || rows.length === 0) {
-      return res.status(400).json({ message: "Excel sheet is empty or invalid" });
+    // Extract names
+    const excelNames = rows.map(r => safeTrim(r.name || r.Name)).filter(n => n);
+
+    // Check duplicates
+    const [existing] = await pool.query(`SELECT name FROM products WHERE name IN (?)`, [excelNames]);
+
+    if (existing.length && !override) {
+      return res.status(409).json({ message: "Duplicate products found", duplicates: existing.map(p => p.name) });
     }
 
-    // Insert rows into DB. Map Excel headers to DB columns.
-    // Expected minimal Excel columns: name, price
-    // Optional: category, brand, description, image, stock, discountPercent, rating
-    let inserted = 0;
-    const insertedIds = [];
+    // If override, delete existing
+    if (override && existing.length) {
+      await pool.query(`DELETE FROM products WHERE name IN (?)`, [excelNames]);
+    }
 
+    // Save file to uploads folder **only now**
+    const filePath = path.join(uploadsDir, Date.now() + "-" + req.file.originalname.replace(/\s+/g, "_"));
+    fs.writeFileSync(filePath, req.file.buffer);
+
+    // Insert products into DB
     for (const r of rows) {
-      const name = (r.name || r.Name || r.NAME || "").toString().trim();
-      const priceRaw = r.price || r.Price || r.PRICE || r.sale_price || null;
-      const price = priceRaw !== null && priceRaw !== undefined ? Number(priceRaw) : 0;
+      const name = safeTrim(r.name || r.Name);
+      if (!name) continue;
+      const price = Number(r.price) || 0;
+      const category = safeTrim(r.category || r.Category || "");
+      const brand = safeTrim(r.brand || r.Brand || "");
+      const description = safeTrim(r.description || r.Description || "");
+      const image = safeTrim(r.image || "");
 
-      if (!name) continue; // skip rows without name
+      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
-      const category = r.category || r.Category || "";
-      const brand = r.brand || r.Brand || "";
-      const description = r.description || r.Description || "";
-      const image = r.image || r.Image || "";
-      const stock = r.stock !== undefined ? Number(r.stock) : 0;
-      const discountPercent = r.discountPercent !== undefined ? Number(r.discountPercent) : 0;
-      const rating = r.rating !== undefined ? Number(r.rating) : 0;
-
-      // generate slug (basic)
-      const slug = name
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
-
-      const [result] = await pool.query(
-        `INSERT INTO products 
-          (name, price, category, brand, description, image, slug, stock, discountPercent, rating)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [name, price || 0, category, brand, description, image, slug, stock, discountPercent, rating]
+      await pool.query(
+        `INSERT INTO products (name, price, category, brand, description, image, slug)
+         VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [name, price, category, brand, description, image, slug]
       );
-
-      if (result && result.insertId) {
-        inserted++;
-        insertedIds.push(result.insertId);
-      }
     }
 
-    return res.json({ message: "Excel uploaded & data inserted", inserted, insertedIds });
+    return res.json({
+      message: override ? "Products overridden & inserted successfully" : "Products inserted successfully",
+      inserted: rows.length,
+    });
+
   } catch (err) {
-    console.error("POST /upload-excel error:", err);
+    console.error(err);
     return res.status(500).json({ message: "Server error", error: err.message });
   }
 });
-
 module.exports = router;

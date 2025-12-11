@@ -41,8 +41,7 @@ const [alertType, setAlertType] = useState("success");
   // Fetch Product
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`/products/slug/${encodeURIComponent(slug)}`)
+    axios.get(`/products/slug/${encodeURIComponent(slug)}`)
       .then((res) => {
         const data = res.data;
         if (!data) {

@@ -598,3 +598,125 @@ input:disabled {
     overflow: hidden;
     white-space: nowrap;
 }
+.upload-container {
+    width: 600px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 50px 60px;
+    border-radius: 11px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+.upload-container h2 {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.upload-box {
+    border: 2px dashed #7a7a7a;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    background: #f9f9f9;
+    transition: 0.2s;
+    margin: 10px 0px 30px 0px;
+}
+
+.upload-box:hover {
+  background: #f2f2f2;
+}
+
+.upload-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.upload-btn {
+    padding: 8px 16px;
+    background: #4b7bec;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer; 
+    display: grid; 
+    justify-self: center;
+}
+
+.size-limit {
+  font-size: 12px;
+  color: gray;
+  margin-top: 6px;
+}
+
+.file-card {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 10px;
+  background: white;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.file-preview {
+  font-size: 30px;
+  margin-right: 15px;
+}
+
+.file-preview img{
+    width: 60px;
+}
+.remove-btn img{
+    width:20px;
+}
+.file-name {
+    font-size: 14px;
+    margin-bottom: 0px;
+    font-weight: 600;
+}
+
+.file-size {
+    font-size: 14px;
+    color: gray;
+    font-weight: 400;
+}
+
+.progress-bar {
+  margin-top: 10px;
+  width: 100%;
+  background: #eee;
+  height: 6px;
+  border-radius: 4px;
+}
+
+.progress {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+.error-text {
+  color: red;
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+.success-text {
+  color: green;
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+.remove-btn,
+.retry-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #444;
+  padding: 5px;
+}
