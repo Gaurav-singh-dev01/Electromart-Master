@@ -5,12 +5,16 @@ import Footer from "./footerComponent/Footer";
 import "../assets/css/style.css";
 import iconExcel from "../assets/img/icon_excel.png";
 import Swal from "sweetalert2";
-import iconwrong from '../assets/img/icon_cross.png';
+import iconwrong from "../assets/img/icon_cross.png";
+
 export default function ExcelUpload() {
   const [fileList, setFileList] = useState([]);
+  const [showAll, setShowAll] = useState(false); // 🔥 view more
   const fileInputRef = useRef();
 
-  // Add multiple files
+  /* ===============================
+     ADD FILES (NEW FILES ON TOP)
+  =============================== */
   const addFiles = (files) => {
     const newFiles = Array.from(files).map((file) => ({
       file,
@@ -18,88 +22,111 @@ export default function ExcelUpload() {
       status: "ready",
     }));
 
-    setFileList((prev) => [...prev, ...newFiles]);
+    // ✅ NEW FILES TOP PAR
+    setFileList((prev) => [...newFiles, ...prev]);
   };
 
-  // Drag drop multiple files
+  /* ===============================
+     DRAG & DROP
+  =============================== */
   const handleDrop = (e) => {
     e.preventDefault();
     addFiles(e.dataTransfer.files);
   };
 
-  // Upload File Function
-  const uploadFile = async (file, override = false) => {
-    try {
-      // UI: Start uploading
-      setFileList((prev) =>
-        prev.map((item) =>
-          item.file === file
-            ? { ...item, status: "uploading", progress: 40 }
-            : item
-        )
-      );
+  /* ===============================
+     UPLOAD SINGLE FILE
+  =============================== */
+const uploadFile = async (file, override = false) => {
+  try {
+    // reset progress to 0
+    setFileList((prev) =>
+      prev.map((item) =>
+        item.file === file
+          ? { ...item, status: "uploading", progress: 0 }
+          : item
+      )
+    );
 
-      const formData = new FormData();
-      formData.append("excel", file);
+    const formData = new FormData();
+    formData.append("excel", file);
 
-      const res = await axios.post(
-        `http://localhost:5000/api/products/upload-excel?override=${override}`,
-        formData
-      );
+    const res = await axios.post(
+      `http://localhost:5000/api/products/upload-excel?override=${override}`,
+      formData,
+      {
+        // 🔥 REAL PROGRESS (0 → 100)
+        onUploadProgress: (progressEvent) => {
+          const percent = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
 
-      // UI: Uploaded Successfully
-      setFileList((prev) =>
-        prev.map((item) =>
-          item.file === file
-            ? { ...item, status: "success", progress: 100 }
-            : item
-        )
-      );
-
-      Swal.fire("Success", res.data.message, "success");
-
-    } catch (err) {
-      // Duplicate case
-      if (err.response?.status === 409) {
-        const duplicates = err.response.data.duplicates;
-
-        const result = await Swal.fire({
-          title: "Duplicate Products Found",
-          html: `
-            <p>These products already exist:</p>
-            <b>${duplicates.join(", ")}</b>
-            <br/><br/>
-            <p>Do you want to override them?</p>
-          `,
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Yes, Override",
-          cancelButtonText: "Cancel",
-        });
-
-        if (result.isConfirmed) {
-          return uploadFile(file, true);
-        } else {
-          Swal.fire("Cancelled", "Upload cancelled", "info");
-          return;
-        }
+          setFileList((prev) =>
+            prev.map((item) =>
+              item.file === file
+                ? { ...item, progress: percent }
+                : item
+            )
+          );
+        },
       }
+    );
 
-      // Other Error
-      setFileList((prev) =>
-        prev.map((item) =>
-          item.file === file ? { ...item, status: "error" } : item
-        )
-      );
+    // success
+    setFileList((prev) =>
+      prev.map((item) =>
+        item.file === file
+          ? { ...item, status: "success", progress: 100 }
+          : item
+      )
+    );
 
-      Swal.fire("Error", "Upload failed due to server error", "error");
+    Swal.fire("Success", res.data.message, "success");
+  } catch (err) {
+    /* duplicate logic same as before */
+    if (err.response?.status === 409) {
+      const duplicates = err.response.data.duplicates;
+
+      const result = await Swal.fire({
+        title: "Duplicate Products Found",
+        html: `
+          <p>These products already exist:</p>
+          <b>${duplicates.join(", ")}</b>
+          <br/><br/>
+          <p>Do you want to override them?</p>
+        `,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Override",
+        cancelButtonText: "Cancel",
+      });
+
+      if (result.isConfirmed) {
+        return uploadFile(file, true);
+      } else {
+        Swal.fire("Cancelled", "Upload cancelled", "info");
+        return;
+      }
     }
-  };
 
-  // Upload All Files
+    // error
+    setFileList((prev) =>
+      prev.map((item) =>
+        item.file === file ? { ...item, status: "error" } : item
+      )
+    );
+
+    Swal.fire("Error", "Upload failed due to server error", "error");
+  }
+};
+
+  /* ===============================
+     UPLOAD ALL FILES
+  =============================== */
   const handleUpload = async () => {
-    if (fileList.length === 0)
+    if (fileList.length === 0) {
       return Swal.fire("Warning", "Please select files first", "warning");
+    }
 
     for (let item of fileList) {
       if (item.status === "ready" || item.status === "error") {
@@ -108,6 +135,11 @@ export default function ExcelUpload() {
     }
   };
 
+  /* ===============================
+     VIEW MORE LOGIC
+  =============================== */
+  const visibleFiles = showAll ? fileList : fileList.slice(0, 2);
+
   return (
     <>
       <Header />
@@ -115,6 +147,7 @@ export default function ExcelUpload() {
       <div className="upload-container">
         <h2>Upload Excel Files</h2>
 
+        {/* DROP ZONE */}
         <div
           className="upload-box"
           onDragOver={(e) => e.preventDefault()}
@@ -138,6 +171,7 @@ export default function ExcelUpload() {
           <p className="size-limit">Max file size 100MB each</p>
         </div>
 
+        {/* UPLOAD BUTTON */}
         <button
           className="upload-btn"
           style={{ marginTop: "20px" }}
@@ -147,12 +181,13 @@ export default function ExcelUpload() {
           Upload All Files
         </button>
 
-        {fileList.map((item, i) => (
+        {/* FILE LIST */}
+        {visibleFiles.map((item, i) => (
           <div className="file-card" key={i}>
             <div className="file-info">
               <div className="d-flex align-items-center">
                 <div className="file-preview">
-                  <img src={iconExcel} className="img img-fluid" />
+                  <img src={iconExcel} alt="excel" />
                 </div>
                 <div>
                   <p className="file-name">{item.file.name}</p>
@@ -162,8 +197,16 @@ export default function ExcelUpload() {
                 </div>
               </div>
 
-              <button className="remove-btn" onClick={() =>setFileList((prev) => prev.filter((_, index) => index !== i))}>
-                <img src={iconwrong} className="img img-fluid" />
+              {/* REMOVE FILE */}
+              <button
+                className="remove-btn"
+                onClick={() =>
+                  setFileList((prev) =>
+                    prev.filter((_, index) => index !== i)
+                  )
+                }
+              >
+                <img src={iconwrong} alt="remove" />
               </button>
             </div>
 
@@ -185,6 +228,18 @@ export default function ExcelUpload() {
             )}
           </div>
         ))}
+
+        {/* VIEW MORE BUTTON */}
+        {fileList.length > 2 && (
+          <button
+            className="view-more-btn"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll
+              ? "View Less"
+              : `View More (${fileList.length - 2})`}
+          </button>
+        )}
       </div>
 
       <Footer />

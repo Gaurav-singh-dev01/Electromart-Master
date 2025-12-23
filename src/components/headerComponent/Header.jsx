@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react' 
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import '../loginComponent/img/login-bg.png'
 import { Link } from 'react-router-dom'
 import '../headerComponent/header.css'
@@ -15,7 +16,30 @@ import kitchen from '../headerComponent/img/kitchen.png'
 import Gyser from '../headerComponent/img/geyser.png'
 import Speakers from '../headerComponent/img/speakers.png'
 export default function Header() {
+const navigate = useNavigate();
 
+const [searchText, setSearchText] = useState("");
+const [results, setResults] = useState([]);
+const [showResults, setShowResults] = useState(false);
+const isItemCodeSearch = /^\d+$/.test(searchText);
+ 
+const [recentSearches, setRecentSearches] = useState([]);
+const [recentViewed, setRecentViewed] = useState([]);
+useEffect(() => {
+  const rs = JSON.parse(localStorage.getItem("recentSearchTerms") || "[]");
+  setRecentSearches(rs);
+
+  const rv = JSON.parse(localStorage.getItem("recentViewedProducts") || "[]");
+  setRecentViewed(rv);
+}, []);
+
+const [recentProduct, setRecentProduct] = useState(null);
+useEffect(() => {
+  const recent = localStorage.getItem("recentProduct");
+  if (recent) {
+    setRecentProduct(JSON.parse(recent));
+  }
+}, []);
 const [cartCount, setCartCount] = useState(
   Number(localStorage.getItem("cartCount")) || 0
 );
@@ -26,6 +50,30 @@ useEffect(() => {
   window.addEventListener("storage", updateCount);
   return () => window.removeEventListener("storage", updateCount);
 }, []);
+
+const handleSearch = async (value) => {
+  setSearchText(value);
+
+  if (!value.trim()) {
+    setResults([]);
+    setShowResults(false);
+    return;
+  }
+
+  try {
+    const res = await axios.get(`/search?q=${value}`);
+    setResults(res.data);
+    setShowResults(true);
+  } catch (err) {
+    console.error("Search error", err);
+  }
+};
+
+const handleSelectProduct = (slug) => {
+  setShowResults(false);
+  setSearchText("");
+  navigate(`/product/${slug}`);
+};
   return (
     <>
     <div className='header__relative'>
@@ -57,8 +105,76 @@ useEffect(() => {
               </div>
             </div>
             <div className='col-lg-6 col-md-6 col-sm-12 col-12 align-self-center'>
-              <div className='header-Electromart_search'>
-                <Input.Search placeholder="Search for products, brands and more" className="custom-search-input" size='large' variant="filled" />
+              <div className='header-Electromart_search' style={{ position: "relative" }}>
+                <Input.Search placeholder="Search for products, brands and more" className="custom-search-input" size='large' variant="filled" value={searchText} onChange={(e) => handleSearch(e.target.value)} onFocus={() => setShowResults(true)}/>
+{/* RECENT SHOW WHEN INPUT EMPTY */}
+{showResults && !searchText && (recentSearches.length > 0 || recentViewed.length > 0) && (
+  <div className="search-dropdown">
+    {/* RECENT SEARCH TERMS */}
+    {recentSearches.length > 0 && (
+      <>
+        <div className="search-section-title">Recent Searches</div>
+        {recentSearches.map((term, i) => (
+          <div
+            key={`term-${i}`}
+            className="search-item search-history"
+            onClick={() => handleSearch(term)}
+          >
+            🔍 {term}
+          </div>
+        ))}
+      </>
+    )}
+
+    {/* RECENTLY VIEWED PRODUCTS */}
+    {recentViewed.length > 0 && (
+      <>
+        <div className="search-section-title">Recently Viewed</div>
+        {recentViewed.map((p, i) => (
+          <div
+            key={`viewed-${i}`}
+            className="search-item"
+            onClick={() => handleSelectProduct(p.slug)}
+          >
+            <img src={p.image} alt={p.name} className="search-item-img" />
+            <div className="search-item-info">
+              <div className="search-item-name">{p.name}</div>
+              <div className="search-item-code">Item Code: {p.articleId}</div>
+            </div>
+          </div>
+        ))}
+      </>
+    )}
+  </div>
+)}
+
+{showResults && searchText && results.length > 0 && (
+  <div className="search-dropdown">
+    {results.map((p) => (
+      <div
+        key={p.id}
+        className="search-item"
+        onClick={() => handleSelectProduct(p.slug)}
+      >
+        <img
+          src={p.image}
+          alt={p.name}
+          className="search-item-img"
+        />
+
+        <div className="search-item-info">
+          <div className="search-item-name">{p.name}</div>
+
+          {/^\d+$/.test(searchText) && (
+            <div className="search-item-code">
+              Article Code: {p.articleId}
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+)}
               </div>
             </div>
             <div className='col-lg-3 col-md-3 col-sm-12 col-12 align-content-center'>
@@ -96,7 +212,7 @@ useEffect(() => {
                       <Link to='' className="desktop-item"><img src={TV} className='img img-fluid' style={{width:'32px'}}/> Televisions</Link> 
                     </li>
                     <li>
-                      <Link to='' className="desktop-item"><img src={Washingmachine} className='img img-fluid' style={{width:'32px'}}/> Washing Machines</Link> 
+                      <Link to='/Washingmachine' className="desktop-item"><img src={Washingmachine} className='img img-fluid' style={{width:'32px'}}/> Washing Machines</Link> 
                     </li>
                     <li>
                       <Link to='' className="desktop-item"><img src={Refrigerator} className='img img-fluid' style={{width:'32px'}}/> Refrigerators</Link> 
